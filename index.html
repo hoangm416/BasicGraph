@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/cytoscape@3.2.17/dist/cytoscape.min.js"></script>
+    </head>
+    <body>
+        <div id="cy" style="width: 1000px; height: 600px;">
+            Basic Graph made by Hoang
+        </div>
+        <script>
+            var cy = cytoscape({
+                container: document.getElementById('cy'),
+                elements: [
+                    { data: { id: 'O' } },
+                    { data: { id: 'A' } },
+                    { data: { id: 'B' } },
+                    { data: { id: 'C' } },
+                    { data: { id: 'D' } },
+                    { data: { id: 'E' } },
+                    { data: { source: 'O', target: 'A' } },
+                    { data: { source: 'O', target: 'B' } },
+                    { data: { source: 'O', target: 'C' } },
+                    { data: { source: 'O', target: 'D' } },
+                    { data: { source: 'O', target: 'E' } }
+                ],
+                style: [
+                    {
+                        selector: 'node',
+                        style: {
+                            'background-color': 'red',
+                            'label': 'data(id)'
+                        }
+                    },
+                    {
+                        selector: 'edge',
+                        style: {
+                            'width': 3,
+                            'line-color': 'green',
+                            'target-arrow-color': 'blue',
+                            'target-arrow-shape': 'triangle'
+                        }
+                    }
+                ],
+                layout: {
+                    name: 'concentric',
+                    concentric: function(node){
+                        return node.degree();
+                    }
+                }   
+            });
+            cy.animate({
+                pan: { x: 100, y: 100 },
+                zoom: 2
+              }, {
+                duration: 1000
+              });
+        </script>
+    </body>
+</html>
