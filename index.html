@@ -44,6 +44,8 @@
                 layout: {
                     name: 'concentric',
                     concentric: function(node){
+                        <!-- nếu một nút có 5 cạnh kết nối với nó, thì node.degree() sẽ trả về giá trị 5 -->
+                        <!-- Các nút có nhiều cạnh kết nối hơn sẽ được đặt gần trung tâm hơn -->
                         return node.degree();
                     }
                 }   
