@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://unpkg.com/cytoscape@3.27.0/dist/cytoscape.min.js"></script>
+        <script src="https://unpkg.com/cytoscape@3.28.0/dist/cytoscape.min.js"></script>
     </head>
     <body>
         <div id="cy" style="width: 1000px; height: 600px;">
@@ -21,20 +21,30 @@
                     { data: { source: 'O', target: 'B' } },
                     { data: { source: 'O', target: 'C' } },
                     { data: { source: 'O', target: 'D' } },
-                    { data: { source: 'O', target: 'E' } }
+                    { data: { source: 'O', target: 'E' } },
+                    { data: { source: 'A', target: 'B' } },
+                    { data: { source: 'B', target: 'C' } },
+                    { data: { source: 'C', target: 'D' } },
+                    { data: { source: 'D', target: 'E' } },
+                    { data: { source: 'E', target: 'A' } },
                 ],
                 style: [
                     {
+                        // thuộc tính của nút
                         selector: 'node',
                         style: {
                             'background-color': 'red',
-                            'label': 'data(id)'
+                            'label': 'data(id)',
+                            'width': '5px',
+                            'height': '5px',
+                            'font-size': '5px'
                         }
                     },
                     {
+                        // thuộc tính của cạnh
                         selector: 'edge',
                         style: {
-                            'width': 3,
+                            'width': 2,
                             'line-color': 'green',
                             'target-arrow-color': 'blue',
                             'target-arrow-shape': 'triangle'
@@ -43,12 +53,15 @@
                 ],
                 layout: {
                     name: 'concentric',
+
+                    <!-- Các nút có nhiều cạnh kết nối hơn sẽ được đặt gần trung tâm hơn --> 
                     concentric: function(node){
-                        <!-- nếu một nút có 5 cạnh kết nối với nó, thì node.degree() sẽ trả về giá trị 5 -->
-                        <!-- Các nút có nhiều cạnh kết nối hơn sẽ được đặt gần trung tâm hơn -->
-                        return node.degree();
+                        // Nếu một nút có 5 cạnh kết nối với nó, thì node.degree() sẽ trả về giá trị 5.               
+                        return node.degree();    
                     }
-                }   
+                },
+                minZoom: 1,
+                maxZoom: 15   
             });
         </script>
     </body>
